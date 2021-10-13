@@ -1,11 +1,15 @@
 package com.smd.cameraultra;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.CameraX;
+import androidx.camera.core.PreviewConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Rational;
+import android.util.Size;
 import android.view.TextureView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startCamera() {
+        CameraX.unbindAll();
+
+        Rational aspectRetio = new Rational(textureView.getWidth(),textureView.getHeight());
+        Size screen = new Size(textureView.getWidth(),textureView.getHeight());
+
+        PreviewConfig pConfig = new PreviewConfig.Builder()
+                .setTargetAspectRatio(aspectRetio)
+                .setTargetResolution(screen).build();
     }
 
     private boolean allPermissionGranted() {
