@@ -2,7 +2,9 @@ package com.smd.cameraultra;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.TextureView;
 
@@ -34,5 +36,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean allPermissionGranted() {
+        for(String permission : REQUIRED_PERMISSION){
+            if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+                return false;
+            }
+        }
+        return true;
     }
 }
